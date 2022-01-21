@@ -17,6 +17,7 @@ mongoose.connect(`mongodb+srv://Yitav:${process.env.DB_PWD}@cluster0.ztd7z.mongo
 
 
 async function run() {
+    try{
  const user = await User.create({
     name: "Chubaka",
     city: "Kashyyyk",
@@ -24,6 +25,10 @@ async function run() {
     cash: 3000000,
     credit: 5000000 })
     user.save()
+    }
+    catch(e) {
+        console.log(e);
+    }  
  }
 //  run()
 
