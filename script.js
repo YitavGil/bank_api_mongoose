@@ -1,14 +1,15 @@
 const express = require('express');
 const req = require('express/lib/request');
 const mongoose = require('mongoose');
+const dotenv = require('dotenv')
 const User = require("./User");
 const {addUser, deleteUser, depositCash, transferCash, withdrawCash} = require('./utils')
 const cors = require('cors')
 const app = express();
 app.use(express.json());
 app.use(cors())
-
-mongoose.connect("mongodb+srv://Yitav:eozQsdKZRA5t9ria@cluster0.ztd7z.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",{ useNewUrlParser: true, useUnifiedTopology: true }).then( (e) => {
+dotenv.config()
+mongoose.connect(`mongodb+srv://Yitav:${process.env.DB_PWD}@cluster0.ztd7z.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`,{ useNewUrlParser: true, useUnifiedTopology: true }).then( (e) => {
     console.log("You are connected")
     console.log(e);
 }
