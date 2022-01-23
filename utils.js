@@ -52,14 +52,18 @@ const depositCash = async (userId, cashAmount) => {
 }   
 
 const withdrawCash = (userId, cashAmount) => {
-    const users = loadUsers();
-    const index = getUserIndex(userId)
-    if(index === -1){
-        throw Error('User not found'); 
+    const user = await User.findOne({_id: userId})
+    if(!user){
+        const e = new Error('User not found')
+        e.status = 404
+        throw e;
     }
-    users[index].cash -= cashAmount
-    // saveUsers(users)
-}
+    
+    user.cash -= cashAmount
+    await user.save()
+    return user
+}   
+
 
 const transferCash = (userId, cashAmount, targetId) => {
     const users = loadUsers();

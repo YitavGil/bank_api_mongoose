@@ -82,6 +82,16 @@ app.patch('/users/:id', async(req, res) => {
         }
 })
 
+app.patch('/users/:id', async(req, res) => {
+    try{
+    const user = await withdrawCash(req.params.id, req.body.cash)
+    res.status(200).json(user)
+        }
+        catch(e){
+            console.log(e);
+        }
+})
+
 
  const PORT = process.env.PORT || 4000;
 
